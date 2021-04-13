@@ -1,0 +1,26 @@
+.navbar {
+  z-index: 999;
+  position: fixed !important;
+  width: 100%;
+  top: 0px !important;
+  background-color: #fff !important;
+  height: 70px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.d-flex {
+  width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+}
+
+.header_icon {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px 0 #00000029;
+}

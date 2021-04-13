@@ -1,0 +1,58 @@
+.container-card{
+    margin: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
+    border-radius: 10px;
+}
+.react-datepicker__input-container{
+    .react-datepicker-ignore-onclickoutside{
+        display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+}
+.cross-button{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.draggable-component{
+    padding-top:  10px  !important;
+    box-shadow: 0 0.5rem 1rem white !important;
+    background: white !important;
+    color: black;
+}
+
+.heading{
+    margin: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.bottom-wrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+.circular-name{
+    background: white;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    .text-name{
+        position: relative;
+    color: black;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    }
+}

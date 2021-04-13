@@ -1,0 +1,22 @@
+//* card component *//
+
+.custom-card {
+    width: 320px;
+    height: auto;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .26);
+    background: #f3f3f3;
+    margin: auto;
+    padding: 54px 25px;
+    border-radius: 4px;
+}
+
+.card-link {
+    color: #007bff !important;
+
+    &:hover {
+        border-bottom: 1px solid #007bff;
+        color: #007bff !important;
+        cursor: pointer;
+    }
+}
+

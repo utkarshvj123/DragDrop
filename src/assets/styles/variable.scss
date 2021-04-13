@@ -1,0 +1,82 @@
+// font size
+$ft10: 10px;
+$ft12: 12px;
+$ft14: 14px;
+$ft16: 16px;
+$ft24: 24px;
+$ft32: 32px;
+$ft40: 40px;
+
+// font weight
+
+$fw400: 400;
+$fw500: 500;
+$fw600: 600;
+$fw700: 700;
+$fw800: 800;
+$fw900: 900;
+$fwbold: bold;
+
+// font size class
+
+.ft-8 {
+  font-size: 8px !important;
+}
+
+.ft-10 {
+  font-size: 10px !important;
+}
+
+.ft-12 {
+  font-size: 12px !important;
+}
+
+.ft-14 {
+  font-size: 14px !important;
+}
+
+.ft-16 {
+  font-size: 16px !important;
+}
+
+.ft-18 {
+  font-size: 18px !important;
+}
+
+.ft-20 {
+  font-size: 20px !important;
+}
+
+.ft-24 {
+  font-size: 24px !important;
+}
+
+.ft-32 {
+  font-size: 32px !important;
+}
+.ft-45 {
+  font-size: 45px !important;
+}
+
+.fw-400 {
+  font-weight: 400 !important;
+}
+.fw-200{
+  font-weight: 200 !important;
+}
+
+.fw-500 {
+  font-weight: 500 !important;
+}
+
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
