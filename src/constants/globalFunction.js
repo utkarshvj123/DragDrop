@@ -43,7 +43,6 @@ export const creatingRequiredDataFormat = (array, searchValue, olderArray) => {
       array3.push(obj);
     }
   });
-  debugger;
 
   return {
     low: array1,
