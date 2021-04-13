@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import * as Icon from "react-bootstrap-icons";
-import { creatingRequiredDataFormat } from "../../constants/globalFunction";
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -94,9 +93,9 @@ class DragDrop extends Component {
   static getDerivedStateFromProps(props, state) {
     if (
       props.listOfAllTasks.dueDatedArray.length > 0 &&
-      props.listOfAllTasks.low.length > 0 &&
-      props.listOfAllTasks.medium.length > 0 &&
-      props.listOfAllTasks.high.length > 0
+      props.listOfAllTasks.low.length >= 0 &&
+      props.listOfAllTasks.medium.length >= 0 &&
+      props.listOfAllTasks.high.length >= 0
       // props.listOfAllTasks.length !== state.completeData.length
     ) {
       const filteredData = props.listOfAllTasks;
@@ -175,7 +174,7 @@ class DragDrop extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
-    console.log(this.state, ".....stateprnting");
+    console.log(this.state, ".....stateprnting..", this.props);
     return (
       <div>
         <div className="d-flex">
@@ -210,29 +209,25 @@ class DragDrop extends Component {
                           >
                             <Icon.ArchiveFill color="red" size={20} />
                           </div>
-                          <div onClick={() => this.props.handlingEdit(item)}>
-                            {item.message}
-                          </div>
-                          {/* <div className="bottom-wrapper">
-                          <div className="cross-button">
-                            <Icon.ArrowUp color="green" size={20} />
-                          </div>
                           <div
-                            className="edit-button"
+                            className="detail-element"
                             onClick={() => this.props.handlingEdit(item)}
                           >
-                            <Icon.PencilSquare color="black" size={20} />
+                            {item.message}
                           </div>
-                        </div> */}
                           <div className="bottom-wrapper">
-                            <div className="cross-button">
+                            <div className="priority-wrapper">
                               <Icon.ArrowUp color="green" size={20} />
+                              <div className="text-styling">
+                                {item?.due_date?.toLocaleDateString()}
+                              </div>
                             </div>
-                            <div>
+                            <div className="img-name-wrapper">
                               <div className="circular-name">
-                                <span className="text-name">
-                                  {item.assigned_name}
-                                </span>
+                                <img src={item.picture} className="text-name" />
+                              </div>
+                              <div className="text-styling">
+                                {item?.assigned_name}
                               </div>
                             </div>
                           </div>
@@ -275,18 +270,28 @@ class DragDrop extends Component {
                           >
                             <Icon.ArchiveFill color="red" size={20} />
                           </div>
-                          <div onClick={() => this.props.handlingEdit(item)}>
+                          <div
+                            className="detail-element"
+                            onClick={() => this.props.handlingEdit(item)}
+                          >
                             {item.message}
                           </div>{" "}
                           <div className="bottom-wrapper">
-                            <div className="cross-button">
+                            <div className="priority-wrapper">
                               <Icon.ArrowUp color="orange" size={20} />
+                              <div className="text-styling">
+                                {item?.due_date?.toLocaleDateString()}
+                              </div>{" "}
                             </div>
-                            <div>
+                            <div className="img-name-wrapper">
                               <div className="circular-name">
-                                <span className="text-name">
+                                {/* <span className="text-name">
                                   {item.assigned_name}
-                                </span>
+                                </span> */}
+                                <img src={item.picture} className="text-name" />
+                              </div>
+                              <div className="text-styling">
+                                {item?.assigned_name}
                               </div>
                             </div>
                           </div>
@@ -330,7 +335,10 @@ class DragDrop extends Component {
                             <Icon.ArchiveFill color="red" size={20} />
                           </div>
 
-                          <div onClick={() => this.props.handlingEdit(item)}>
+                          <div
+                            className="detail-element"
+                            onClick={() => this.props.handlingEdit(item)}
+                          >
                             {item.message}
                           </div>
                           {/* <div
@@ -340,14 +348,21 @@ class DragDrop extends Component {
                             <Icon.PencilSquare color="black" size={20} />
                           </div> */}
                           <div className="bottom-wrapper">
-                            <div className="cross-button">
+                            <div className="priority-wrapper">
                               <Icon.ArrowUp color="red" size={20} />
+                              <div className="text-styling">
+                                {item?.due_date?.toLocaleDateString()}
+                              </div>
                             </div>
-                            <div>
+                            <div className="img-name-wrapper">
                               <div className="circular-name">
-                                <span className="text-name">
+                                {/* <span className="text-name">
                                   {item.assigned_name}
-                                </span>
+                                </span> */}
+                                <img src={item.picture} className="text-name" />
+                              </div>
+                              <div className="text-styling">
+                                {item?.assigned_name}
                               </div>
                             </div>
                           </div>

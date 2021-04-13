@@ -40,3 +40,6 @@
   width: 100%  !important;
   height: 100%  !important;
 }
+.Toastify__toast-container{
+z-index: 999999999 !important;
+}

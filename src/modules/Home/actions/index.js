@@ -3,6 +3,7 @@ import { requiredData } from "../../../constants/globalFunction.js";
 import {
   requiredDateTimeFormat,
   creatingRequiredDataFormat,
+  mappingDataWithUserDetail,
 } from "../../../constants/globalFunction";
 import { SPINNER } from "../../Login/actions";
 
@@ -34,22 +35,27 @@ export const getListOfUsers = () => async (dispatch) => {
   }
 };
 
-export const getTaskLists = () => async (dispatch) => {
+export const getTaskLists = (userList) => async (dispatch) => {
   try {
     const newUrl = `${URL}/list`;
     const response = await axios.get(newUrl, { headers });
     if (response?.data?.status === "success") {
-      dispatch({ type: SPINNER, payload: false });
-      debugger;
       dispatch({
         type: GET_LIST_TASKS,
-        payload: creatingRequiredDataFormat(response?.data?.tasks),
+        payload: mappingDataWithUserDetail(userList, response?.data?.tasks),
       });
     }
     return response;
   } catch (ex) {
     return ex;
   }
+};
+
+export const searchingName = (array, searched) => async (dispatch) => {
+  dispatch({
+    type: GET_LIST_TASKS,
+    payload: creatingRequiredDataFormat(array, searched, array),
+  });
 };
 
 export const createTask = (jsonForTask) => async (dispatch) => {

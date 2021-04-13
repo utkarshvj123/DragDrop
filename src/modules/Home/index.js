@@ -10,6 +10,7 @@ import {
   createTask,
   taskRemoved,
   updateTask,
+  searchingName,
 } from "./actions";
 import NavBar from "../../components/NavBar";
 import { authenticateUserAction } from "../Login/actions";
@@ -18,6 +19,7 @@ import { toast } from "react-toastify";
 import DragDrop from "../../components/DragDrop/index";
 import CreateTaskModal from "./Components/CreateTaskModal";
 import { spinerStateUpdate } from "../Login/actions";
+import { creatingRequiredDataFormat } from "../../constants/globalFunction";
 
 const Container = styled.div`
   margin-top: 100px;
@@ -41,6 +43,7 @@ const Home = () => {
   const [completeJsonForDisplay, setCompleteJsonForDisplay] = useState({});
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [searchValueDefined, setSearchValue] = useState("");
+  // const []
   // const [currentType, setCurrentType] = useState("");
 
   const currentListOfUsers = useSelector(
@@ -49,10 +52,14 @@ const Home = () => {
   const listOfAllTasks = useSelector(
     (state) => state?.homeData?.listOfAllTasks
   );
+
   useEffect(() => {
     dispatch(spinerStateUpdate(true));
-    dispatch(getListOfUsers());
-    dispatch(getTaskLists()).then((res) => dispatch(spinerStateUpdate(false)));
+    dispatch(getListOfUsers()).then((res) => {
+      dispatch(getTaskLists(res.data.users)).then((res) => {
+        dispatch(spinerStateUpdate(false));
+      });
+    });
   }, []);
 
   const onChangeDateTime = (date) => {
@@ -84,9 +91,9 @@ const Home = () => {
           if (response?.data?.status === "success") {
             modalEventHandler("enable");
             setCompleteJsonForDisplay({});
-            dispatch(getTaskLists()).then((res) =>
-              dispatch(spinerStateUpdate(false))
-            );
+            dispatch(getTaskLists(currentListOfUsers)).then((res) => {
+              dispatch(spinerStateUpdate(false));
+            });
             toastMessage("success", "Task successfully added.");
           }
         });
@@ -149,7 +156,7 @@ const Home = () => {
           if (response.data.status === "success") {
             setEditModalVisible(!editModalVisible);
             setCompleteJsonForDisplay({});
-            dispatch(getTaskLists()).then((res) =>
+            dispatch(getTaskLists(currentListOfUsers)).then((res) =>
               dispatch(spinerStateUpdate(false))
             );
             toastMessage("success", "Detail updated successfully.");
@@ -163,7 +170,7 @@ const Home = () => {
     dispatch(spinerStateUpdate(true));
     dispatch(taskRemoved(removalValue.id)).then((response) => {
       if (response.data.status === "success") {
-        dispatch(getTaskLists()).then((res) =>
+        dispatch(getTaskLists(currentListOfUsers)).then((res) =>
           dispatch(spinerStateUpdate(false))
         );
         toastMessage("success", "Removed successfully.");
@@ -179,7 +186,7 @@ const Home = () => {
     dispatch(spinerStateUpdate(true));
     dispatch(updateTask(json)).then((response) => {
       if (response.data.status === "success") {
-        dispatch(getTaskLists()).then((res) =>
+        dispatch(getTaskLists(currentListOfUsers)).then((res) =>
           dispatch(spinerStateUpdate(false))
         );
         toastMessage("success", "Priority updated successfully..");
@@ -188,10 +195,12 @@ const Home = () => {
   };
 
   const onChangeSearch = (value) => {
+    dispatch(searchingName(listOfAllTasks?.clonedData, value.target.value));
     setSearchValue(value.target.value);
-    debugger;
+    // debugger;
   };
-  console.log();
+
+  // console.log(_users, "......._users");
   return (
     <React.Fragment>
       <Container>
@@ -206,8 +215,9 @@ const Home = () => {
             type="text"
             value={searchValueDefined}
             onChange={onChangeSearch}
+            placeholder="Search"
+            className="form-control"
           />
-          <button className="btn btn-primary">Search</button>
         </div>
 
         {Object.keys(listOfAllTasks).length > 0 && (

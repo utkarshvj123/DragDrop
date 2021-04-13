@@ -17,13 +17,21 @@ export const requiredDateTimeFormat = (date, timeStatus) => {
   return newFormat2;
 };
 
-export const creatingRequiredDataFormat = (array) => {
+export const creatingRequiredDataFormat = (array, searchValue, olderArray) => {
+  let _users = array;
+  let search = searchValue.trim().toLowerCase();
+  if (search.length > 0) {
+    _users = _users.filter(function (user) {
+      return user.assigned_name.toLowerCase().match(search);
+    });
+  }
+
   let array1 = [];
   let array2 = [];
   let array3 = [];
   let completeArray = [];
 
-  array.filter((obj) => {
+  _users.filter((obj) => {
     const newDate = new Date(obj.due_date);
     obj = { ...obj, due_date: newDate };
     completeArray.push(obj);
@@ -35,13 +43,51 @@ export const creatingRequiredDataFormat = (array) => {
       array3.push(obj);
     }
   });
+  debugger;
+
   return {
     low: array1,
     medium: array2,
     high: array3,
     dueDatedArray: completeArray,
+    clonedData: olderArray,
   };
 };
+
+export const mappingDataWithUserDetail = (smallerArray, biggerArray) => {
+  let array1 = [];
+  let array2 = [];
+  let array3 = [];
+  let completeArray = [];
+  smallerArray.filter((obj) => {
+    biggerArray.filter((obj2) => {
+      if (obj2.assigned_to === obj.id) {
+        let newObj = {
+          ...obj2,
+          ...obj,
+          id: obj2.id,
+          due_date: new Date(obj2.due_date),
+        };
+        completeArray.push(newObj);
+        if (obj2.priority === "1") {
+          array1.push(newObj);
+        } else if (obj2.priority === "2") {
+          array2.push(newObj);
+        } else if (obj2.priority === "3") {
+          array3.push(newObj);
+        }
+      }
+    });
+  });
+  return {
+    low: array1,
+    medium: array2,
+    high: array3,
+    dueDatedArray: completeArray,
+    clonedData: completeArray,
+  };
+};
+
 export const requiredData = (array) => {
   array.forEach((object) => {
     if (object.name || object.count) {
