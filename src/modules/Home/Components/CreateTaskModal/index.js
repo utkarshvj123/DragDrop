@@ -62,7 +62,11 @@ const CreateTaskModal = ({
           <input
             className="form-control"
             onChange={onChangeMessage}
-            value={completeJsonForDisplay?.message}
+            value={
+              completeJsonForDisplay?.message === undefined
+                ? ""
+                : completeJsonForDisplay?.message
+            }
           />
         </div>
         <div className="form-group">

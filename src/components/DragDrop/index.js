@@ -91,6 +91,23 @@ class DragDrop extends Component {
     otherSelected: this.props.listOfAllTasks.high,
     completeData: this.props.listOfAllTasks.dueDatedArray,
   };
+  static getDerivedStateFromProps(props, state) {
+    if (
+      props.listOfAllTasks.dueDatedArray.length > 0 &&
+      props.listOfAllTasks.low.length > 0 &&
+      props.listOfAllTasks.medium.length > 0 &&
+      props.listOfAllTasks.high.length > 0
+      // props.listOfAllTasks.length !== state.completeData.length
+    ) {
+      const filteredData = props.listOfAllTasks;
+      return {
+        completeData: filteredData.dueDatedArray,
+        items: filteredData.low,
+        selected: filteredData.medium,
+        otherSelected: filteredData.high,
+      };
+    } else return { ...state };
+  }
 
   /**
    * A semi-generic way to handle multiple lists. Matches
