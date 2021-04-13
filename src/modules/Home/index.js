@@ -70,8 +70,10 @@ const Home = () => {
   };
 
   const modalEventHandler = (type) => {
-    if (type === "enable") return setModalVisibility(!modalVisble);
-    else {
+    if (type === "enable") {
+      setCompleteJsonForDisplay({});
+      setModalVisibility(!modalVisble);
+    } else {
       if (
         completeJsonForDisplay?.due_date &&
         completeJsonForDisplay?.assigned_to !== undefined &&
@@ -135,8 +137,10 @@ const Home = () => {
   };
 
   const editModalSubmitHandler = (type, dataValue) => {
-    if (type === "enable") return setEditModalVisible(!editModalVisible);
-    else {
+    if (type === "enable") {
+      setCompleteJsonForDisplay({});
+      setEditModalVisible(!editModalVisible);
+    } else {
       if (
         dataValue.due_date &&
         Object.keys(dataValue.priority).length > 0 &&
