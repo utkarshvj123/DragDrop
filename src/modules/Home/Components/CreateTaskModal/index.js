@@ -32,7 +32,6 @@ const CreateTaskModal = ({
     );
   }
 
-  debugger;
   completeJsonForDisplay = {
     ...completeJsonForDisplay,
     priority: prioritySetFind,

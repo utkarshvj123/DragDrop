@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   listOfAllUsers: [],
-  listOfAllTasks: [],
+  listOfAllTasks: {},
   modalPopUp: false,
 };
 

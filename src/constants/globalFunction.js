@@ -21,21 +21,25 @@ export const creatingRequiredDataFormat = (array) => {
   let array1 = [];
   let array2 = [];
   let array3 = [];
+  let completeArray = [];
 
   array.filter((obj) => {
     const newDate = new Date(obj.due_date);
+    obj = { ...obj, due_date: newDate };
+    completeArray.push(obj);
     if (obj.priority === "1") {
-      array1.push({ ...obj, due_date: newDate });
+      array1.push(obj);
     } else if (obj.priority === "2") {
-      array2.push({ ...obj, due_date: newDate });
+      array2.push(obj);
     } else if (obj.priority === "3") {
-      array3.push({ ...obj, due_date: newDate });
+      array3.push(obj);
     }
   });
   return {
     low: array1,
     medium: array2,
     high: array3,
+    dueDatedArray: completeArray,
   };
 };
 export const requiredData = (array) => {

@@ -40,6 +40,7 @@ const Home = () => {
   const [modalVisble, setModalVisibility] = useState(false);
   const [completeJsonForDisplay, setCompleteJsonForDisplay] = useState({});
   const [editModalVisible, setEditModalVisible] = useState(false);
+  const [searchValueDefined, setSearchValue] = useState("");
   // const [currentType, setCurrentType] = useState("");
 
   const currentListOfUsers = useSelector(
@@ -65,16 +66,18 @@ const Home = () => {
     if (type === "enable") return setModalVisibility(!modalVisble);
     else {
       if (
-        completeJsonForDisplay.due_date &&
-        Object.keys(completeJsonForDisplay.priority).length > 0 &&
-        Object.keys(completeJsonForDisplay.assigned_to).length > 0 &&
-        completeJsonForDisplay.message
+        completeJsonForDisplay?.due_date &&
+        completeJsonForDisplay?.assigned_to !== undefined &&
+        completeJsonForDisplay?.priority !== undefined &&
+        Object.keys(completeJsonForDisplay?.priority).length > 0 &&
+        Object.keys(completeJsonForDisplay?.assigned_to).length > 0 &&
+        completeJsonForDisplay?.message
       ) {
         const jsonCreation = {
-          message: completeJsonForDisplay.message,
-          due_date: completeJsonForDisplay.due_date,
-          priority: completeJsonForDisplay.priority.id,
-          assigned_to: completeJsonForDisplay.assigned_to.id,
+          message: completeJsonForDisplay?.message,
+          due_date: completeJsonForDisplay?.due_date,
+          priority: completeJsonForDisplay?.priority.id,
+          assigned_to: completeJsonForDisplay?.assigned_to.id,
         };
         dispatch(spinerStateUpdate(true));
         dispatch(createTask(jsonCreation)).then((response) => {
@@ -127,7 +130,6 @@ const Home = () => {
   const editModalSubmitHandler = (type, dataValue) => {
     if (type === "enable") return setEditModalVisible(!editModalVisible);
     else {
-      debugger;
       if (
         dataValue.due_date &&
         Object.keys(dataValue.priority).length > 0 &&
@@ -185,6 +187,10 @@ const Home = () => {
     });
   };
 
+  const onChangeSearch = (value) => {
+    setSearchValue(value.target.value);
+    debugger;
+  };
   console.log();
   return (
     <React.Fragment>
@@ -195,13 +201,23 @@ const Home = () => {
         >
           Create Task
         </button>
+        <div>
+          <input
+            type="text"
+            value={searchValueDefined}
+            onChange={onChangeSearch}
+          />
+          <button className="btn btn-primary">Search</button>
+        </div>
 
-        <DragDrop
-          handlingRemoval={handlingRemoval}
-          listOfAllTasks={listOfAllTasks}
-          handlingEdit={handlingEdit}
-          handleDragDrop={handleDragDrop}
-        />
+        {Object.keys(listOfAllTasks).length > 0 && (
+          <DragDrop
+            handlingRemoval={handlingRemoval}
+            listOfAllTasks={listOfAllTasks}
+            handlingEdit={handlingEdit}
+            handleDragDrop={handleDragDrop}
+          />
+        )}
         {modalVisble && (
           <CreateTaskModal
             modalVisble={modalVisble}

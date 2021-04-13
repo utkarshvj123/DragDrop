@@ -1,6 +1,10 @@
 import axios from "axios";
 import { requiredData } from "../../../constants/globalFunction.js";
-import { requiredDateTimeFormat } from "../../../constants/globalFunction";
+import {
+  requiredDateTimeFormat,
+  creatingRequiredDataFormat,
+} from "../../../constants/globalFunction";
+import { SPINNER } from "../../Login/actions";
 
 export const GET_LIST_USERS = "GET_DATA";
 export const MODAL_POP_UP = "MODAL_POP_UP";
@@ -35,10 +39,11 @@ export const getTaskLists = () => async (dispatch) => {
     const newUrl = `${URL}/list`;
     const response = await axios.get(newUrl, { headers });
     if (response?.data?.status === "success") {
-      // dispatch({ type: SPINNER, payload: false });
+      dispatch({ type: SPINNER, payload: false });
+      debugger;
       dispatch({
         type: GET_LIST_TASKS,
-        payload: response?.data?.tasks,
+        payload: creatingRequiredDataFormat(response?.data?.tasks),
       });
     }
     return response;
