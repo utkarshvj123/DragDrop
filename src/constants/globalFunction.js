@@ -17,6 +17,20 @@ export const requiredDateTimeFormat = (date, timeStatus) => {
   return newFormat2;
 };
 
+export const handlingDrapAndDropUntillApiResponse = (
+  array1,
+  array2,
+  olderArray
+) => {
+  return {
+    low: array1?.result?.priorityLow,
+    medium: array1?.result?.priorityMedium,
+    high: array1?.result?.priorityHigh,
+    dueDatedArray: array2,
+    clonedData: olderArray,
+  };
+};
+
 export const creatingRequiredDataFormat = (array, searchValue, olderArray) => {
   let _users = array;
   let search = searchValue.trim().toLowerCase();

@@ -187,8 +187,16 @@ const Home = () => {
     setEditModalVisible(!editModalVisible);
   };
   const handleDragDrop = (json) => {
+    console.log(json, ".....json");
+
     dispatch(spinerStateUpdate(true));
-    dispatch(updateTask(json)).then((response) => {
+    dispatch(
+      updateTask(
+        json,
+        listOfAllTasks?.dueDatedArray,
+        listOfAllTasks?.clonedData
+      )
+    ).then((response) => {
       if (response.data.status === "success") {
         dispatch(getTaskLists(currentListOfUsers)).then((res) =>
           dispatch(spinerStateUpdate(false))

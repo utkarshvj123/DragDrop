@@ -4,6 +4,7 @@ import {
   requiredDateTimeFormat,
   creatingRequiredDataFormat,
   mappingDataWithUserDetail,
+  handlingDrapAndDropUntillApiResponse,
 } from "../../../constants/globalFunction";
 import { SPINNER } from "../../Login/actions";
 
@@ -58,6 +59,13 @@ export const searchingName = (array, searched) => async (dispatch) => {
   });
 };
 
+export const dragAndDrop = (array, result) => async (dispatch) => {
+  dispatch({
+    type: GET_LIST_TASKS,
+    payload: creatingRequiredDataFormat(array, result),
+  });
+};
+
 export const createTask = (jsonForTask) => async (dispatch) => {
   const geetingValidDate = requiredDateTimeFormat(jsonForTask.due_date, false);
 
@@ -80,8 +88,21 @@ export const createTask = (jsonForTask) => async (dispatch) => {
   }
 };
 
-export const updateTask = (jsonForTask) => async (dispatch) => {
-  const geetingValidDate = requiredDateTimeFormat(jsonForTask.due_date, false);
+export const updateTask = (jsonForTask, dueDatedArray, olderArray) => async (
+  dispatch
+) => {
+  debugger;
+  if (dueDatedArray?.length > 0 && olderArray?.length > 0) {
+    dispatch({
+      type: GET_LIST_TASKS,
+      payload: handlingDrapAndDropUntillApiResponse(
+        jsonForTask,
+        dueDatedArray,
+        olderArray
+      ),
+    });
+  }
+  const geetingValidDate = requiredDateTimeFormat(jsonForTask?.due_date, false);
   var bodyFormData = new FormData();
   bodyFormData.append("message", jsonForTask.message);
   bodyFormData.append("due_date", geetingValidDate);

@@ -43,11 +43,7 @@ const move = (
 
   const destClone = Array.from(destination);
   const [removed] = sourceClone.splice(droppableSource.index, 1);
-  actionFunction({
-    ...removed,
-    priority: priorityTypeKey,
-    due_date: new Date(removed.due_date),
-  });
+
   destClone.splice(droppableDestination.index, 0, {
     ...removed,
     priority: priorityTypeKey,
@@ -57,8 +53,12 @@ const move = (
   result[droppableSource.droppableId] = sourceClone;
   result[droppableDestination.droppableId] = destClone;
   result[findedNotAvailableName] = findedNotAvailable;
-  // debugger;
-
+  actionFunction({
+    ...removed,
+    priority: priorityTypeKey,
+    due_date: new Date(removed.due_date),
+    result,
+  });
   return result;
 };
 
