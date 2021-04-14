@@ -103,7 +103,6 @@ export const mappingDataWithUserDetail = (smallerArray, biggerArray) => {
 
 export const objectCreationAfterSort = (objectValue, sortName) => {
   const cloneDataObj = { ...objectValue };
-  debugger;
   return {
     low: sortData(cloneDataObj.low, sortName),
     medium: sortData(cloneDataObj.medium, sortName),
@@ -114,7 +113,6 @@ export const objectCreationAfterSort = (objectValue, sortName) => {
 };
 
 export const sortData = (allData, sortName) => {
-  debugger;
   if (sortName === "due_date") {
     return allData.sort(function (a, b) {
       return a[sortName] - b[sortName];

@@ -63,7 +63,6 @@ export const searchingName = (array, searched) => async (dispatch) => {
 export const sortDataAccourdingToUserSpecific = (array, sortedName) => async (
   dispatch
 ) => {
-  debugger;
   dispatch({
     type: GET_LIST_TASKS,
     payload: objectCreationAfterSort(array, sortedName),
@@ -95,7 +94,6 @@ export const createTask = (jsonForTask) => async (dispatch) => {
 export const updateTask = (jsonForTask, dueDatedArray, olderArray) => async (
   dispatch
 ) => {
-  debugger;
   if (dueDatedArray?.length > 0 && olderArray?.length > 0) {
     dispatch({
       type: GET_LIST_TASKS,
