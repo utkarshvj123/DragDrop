@@ -5,6 +5,7 @@ import {
   creatingRequiredDataFormat,
   mappingDataWithUserDetail,
   handlingDrapAndDropUntillApiResponse,
+  objectCreationAfterSort,
 } from "../../../constants/globalFunction";
 import { SPINNER } from "../../Login/actions";
 
@@ -59,10 +60,13 @@ export const searchingName = (array, searched) => async (dispatch) => {
   });
 };
 
-export const dragAndDrop = (array, result) => async (dispatch) => {
+export const sortDataAccourdingToUserSpecific = (array, sortedName) => async (
+  dispatch
+) => {
+  debugger;
   dispatch({
     type: GET_LIST_TASKS,
-    payload: creatingRequiredDataFormat(array, result),
+    payload: objectCreationAfterSort(array, sortedName),
   });
 };
 

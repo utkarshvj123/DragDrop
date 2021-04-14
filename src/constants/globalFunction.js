@@ -101,6 +101,44 @@ export const mappingDataWithUserDetail = (smallerArray, biggerArray) => {
   };
 };
 
+export const objectCreationAfterSort = (objectValue, sortName) => {
+  const cloneDataObj = { ...objectValue };
+  debugger;
+  return {
+    low: sortData(cloneDataObj.low, sortName),
+    medium: sortData(cloneDataObj.medium, sortName),
+    high: sortData(cloneDataObj.high, sortName),
+    dueDatedArray: sortData(cloneDataObj.dueDatedArray, sortName),
+    clonedData: sortData(cloneDataObj.clonedData, sortName),
+  };
+};
+
+export const sortData = (allData, sortName) => {
+  debugger;
+  if (sortName === "due_date") {
+    return allData.sort(function (a, b) {
+      return a[sortName] - b[sortName];
+    });
+  } else {
+    return allData.sort((data1, data2) => {
+      return compareObjects(data1, data2, sortName);
+    });
+  }
+};
+
+const compareObjects = (object1, object2, key) => {
+  const obj1 = object1[key].toUpperCase();
+  const obj2 = object2[key].toUpperCase();
+
+  if (obj1 < obj2) {
+    return -1;
+  }
+  if (obj1 > obj2) {
+    return 1;
+  }
+  return 0;
+};
+
 export const requiredData = (array) => {
   array.forEach((object) => {
     if (object.name || object.count) {

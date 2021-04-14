@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./style.scss";
 import { bindActionCreators } from "redux";
+import Select from "../../components/Select";
 
 import {
   geStackExchanegeData,
@@ -11,6 +12,7 @@ import {
   taskRemoved,
   updateTask,
   searchingName,
+  sortDataAccourdingToUserSpecific,
 } from "./actions";
 import NavBar from "../../components/NavBar";
 import { authenticateUserAction } from "../Login/actions";
@@ -43,8 +45,7 @@ const Home = () => {
   const [completeJsonForDisplay, setCompleteJsonForDisplay] = useState({});
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [searchValueDefined, setSearchValue] = useState("");
-  // const []
-  // const [currentType, setCurrentType] = useState("");
+  const [sortSelect, setSortSelect] = useState({});
 
   const currentListOfUsers = useSelector(
     (state) => state?.homeData?.listOfAllUsers
@@ -128,11 +129,16 @@ const Home = () => {
         ...completeJsonForDisplay,
         priority: selectedOption,
       });
-    } else {
+    } else if (type === "assigned") {
       setCompleteJsonForDisplay({
         ...completeJsonForDisplay,
         assigned_to: selectedOption,
       });
+    } else if (type === "sort") {
+      dispatch(
+        sortDataAccourdingToUserSpecific(listOfAllTasks, selectedOption.value)
+      );
+      setSortSelect(selectedOption);
     }
   };
 
@@ -212,6 +218,11 @@ const Home = () => {
     // debugger;
   };
 
+  const sortNumber = [
+    { id: "1", name: "Date", value: "due_date" },
+    { id: "2", name: "Name", value: "assigned_name" },
+  ];
+
   // console.log(_users, "......._users");
   return (
     <React.Fragment>
@@ -223,13 +234,25 @@ const Home = () => {
           Create Task
         </button>
         <div>
-          <input
-            type="text"
-            value={searchValueDefined}
-            onChange={onChangeSearch}
-            placeholder="Search"
-            className="form-control"
-          />
+          <div>
+            <input
+              type="text"
+              value={searchValueDefined}
+              onChange={onChangeSearch}
+              placeholder="Search"
+              className="form-control"
+            />
+          </div>
+          <div>
+            <div className="form-group">
+              <label>Sort :</label>
+              <Select
+                currentSelected={sortSelect}
+                handleOnChange={(event) => hadleOnChangePriority(event, "sort")}
+                options={sortNumber}
+              />
+            </div>
+          </div>
         </div>
 
         {Object.keys(listOfAllTasks).length > 0 && (
