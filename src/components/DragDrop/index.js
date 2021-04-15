@@ -178,7 +178,7 @@ class DragDrop extends Component {
     return (
       <div>
         {this.props.listOfAllTasks.dueDatedArray.length > 0 ? (
-          <div className="d-flex">
+          <div className="wrapper-dragdrop">
             <DragDropContext onDragEnd={this.onDragEnd}>
               <Droppable droppableId="priorityLow">
                 {(provided, snapshot) => (

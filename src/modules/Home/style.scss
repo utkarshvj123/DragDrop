@@ -27,7 +27,7 @@
 }
 .draggable-component{
     padding-top:  10px  !important;
-    box-shadow: 0 0.5rem 1rem white !important;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
     background: white !important;
     color: black;
 }
@@ -83,4 +83,18 @@
     padding: 10px;
     overflow-wrap: break-word;
     text-align: left;
+}
+
+.searchSection{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    .btnSearch{
+        margin-right: 10px;
+    }
+}
+.wrapper-dragdrop{
+    display: flex;
+    padding: 10px;
 }

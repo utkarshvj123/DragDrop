@@ -13,6 +13,7 @@ export const GET_LIST_USERS = "GET_DATA";
 export const MODAL_POP_UP = "MODAL_POP_UP";
 export const GET_LIST_TASKS = "GET_LIST_TASKS";
 export const TASK_CREATED = "TASK_CREATED";
+export const SORT_CATEGORY = "SORT_CATEGORY";
 
 const URL = "https://devza.com/tests/tasks";
 const API_KEY = "e5PhLmwULk9R4nlIMqTzbXnLt5QqiXUN";
@@ -35,6 +36,14 @@ export const getListOfUsers = () => async (dispatch) => {
   } catch (ex) {
     return ex;
   }
+};
+
+export const settingSortCategory = (category) => async (dispatch) => {
+  debugger;
+  dispatch({
+    type: SORT_CATEGORY,
+    payload: category,
+  });
 };
 
 export const getTaskLists = (userList) => async (dispatch) => {

@@ -13,6 +13,7 @@ import {
   updateTask,
   searchingName,
   sortDataAccourdingToUserSpecific,
+  settingSortCategory,
 } from "./actions";
 import NavBar from "../../components/NavBar";
 import { authenticateUserAction } from "../Login/actions";
@@ -135,6 +136,7 @@ const Home = () => {
         assigned_to: selectedOption,
       });
     } else if (type === "sort") {
+      dispatch(settingSortCategory(selectedOption.value));
       dispatch(
         sortDataAccourdingToUserSpecific(listOfAllTasks, selectedOption.value)
       );
@@ -226,7 +228,7 @@ const Home = () => {
   // console.log(_users, "......._users");
   return (
     <React.Fragment>
-      <Container>
+      <Container className="container">
         <button
           className="btn btn-primary"
           onClick={() => modalEventHandler("enable")}
