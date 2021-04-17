@@ -122,7 +122,6 @@ export const mappingDataWithUserDetail = (
     //   clonedData: objectCreationAfterSort(completeArray, sortedName),
     // };
   }
-  debugger;
   return requiredData;
 };
 

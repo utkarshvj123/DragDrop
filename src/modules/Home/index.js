@@ -25,15 +25,51 @@ const Container = styled.div`
   padding: 100px 0px 30px 0px;
 `;
 
-const TopWrapper = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0% 10%;
-  @media (max-width: 840px) {
-    padding: 0% 5%;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+
+    .icon-add {
+      font-size: 20px;
+      margin-left: 5px;
+    }
   }
-  @media (max-width: 720px) {
-    display: block;
+  // @media (max-width: 840px) {
+  //   padding: 0% 5%;
+  // }
+  // @media (max-width: 720px) {
+  //   display: block;
+  // }
+`;
+
+const SearchSortWrapper = styled.div`
+  background: lightgray;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) !important;
+  .input-search-sort {
+    .input-search {
+      width: 100%;
+      margin: 20px 0px;
+      input {
+        height: inherit;
+        border-radius: 54px;
+        padding: 0px 20px;
+        height: 56px;
+      }
+      .search-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 10px;
+        color: #be3946;
+      }
+    }
+    // justify-content: flex-end;
   }
 `;
 
@@ -221,28 +257,37 @@ const Home = () => {
   ];
 
   // console.log(_users, "......._users");
+  const isDisabledSordSearch =
+    Object.keys(listOfAllTasks).length > 0 ? false : true;
   return (
     <React.Fragment>
       <div className="container">
         <Container>
-          <button
-            className="btn btn-primary"
-            onClick={() => modalEventHandler("enable")}
-          >
-            <Icon.Plus />
-            Create Task
-          </button>
-          <div>
-            <div>
-              <input
-                type="text"
-                value={searchValueDefined}
-                onChange={onChangeSearch}
-                placeholder="Search"
-                className="form-control"
-              />
-            </div>
-            <div>
+          <ButtonWrapper>
+            <button
+              className="btn btn-primary"
+              onClick={() => modalEventHandler("enable")}
+            >
+              Create Task
+              <div className="icon-add">
+                <Icon.Plus />
+              </div>{" "}
+            </button>
+          </ButtonWrapper>
+          <SearchSortWrapper>
+            <div className="input-search-sort">
+              <div className="input-search">
+                <input
+                  type="text"
+                  value={searchValueDefined}
+                  onChange={onChangeSearch}
+                  placeholder="Search"
+                  className="form-control"
+                  disabled={isDisabledSordSearch}
+                />
+                <div className="search-text">Devza Search</div>
+              </div>
+
               <div className="form-group">
                 <label>Sort :</label>
                 <Select
@@ -251,20 +296,23 @@ const Home = () => {
                     hadleOnChangePriority(event, "sort")
                   }
                   options={sortNumber}
+                  isDisabled={isDisabledSordSearch}
                 />
               </div>
             </div>
-          </div>
-          {Object.keys(listOfAllTasks).length > 0 ? (
-            <DragDrop
-              handlingRemoval={handlingRemoval}
-              listOfAllTasks={listOfAllTasks}
-              handlingEdit={handlingEdit}
-              handleDragDrop={handleDragDrop}
-            />
-          ) : (
-            <div>No data found</div>
-          )}
+            {Object.keys(listOfAllTasks).length > 0 ? (
+              <div className="wrapper-dragdrop">
+                <DragDrop
+                  handlingRemoval={handlingRemoval}
+                  listOfAllTasks={listOfAllTasks}
+                  handlingEdit={handlingEdit}
+                  handleDragDrop={handleDragDrop}
+                />
+              </div>
+            ) : (
+              <div>No data found</div>
+            )}
+          </SearchSortWrapper>
           {modalVisble && (
             <CreateTaskModal
               modalVisble={modalVisble}

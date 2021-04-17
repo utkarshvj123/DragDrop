@@ -35,9 +35,7 @@ const SpinnerComponent = () => {
         text="Loading your content..."
         style={{ width: "100%", height: "100%" }}
         className="spinner-class"
-      >
-        <p>Some content or children or something.</p>
-      </LoadingOverlay>
+      />
     </DarkBackground>
   );
 };

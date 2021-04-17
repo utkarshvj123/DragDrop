@@ -1,6 +1,6 @@
 import React from "react";
 
-const Select = ({ currentSelected, handleOnChange, options }) => {
+const Select = ({ currentSelected, handleOnChange, options, isDisabled }) => {
   const gettingChangedvalue = (event) => {
     const findedvalue = options.find((film) => film.id == event.target.value);
     handleOnChange(findedvalue);
@@ -38,6 +38,7 @@ const Select = ({ currentSelected, handleOnChange, options }) => {
       }
       onChange={gettingChangedvalue}
       placeholder="select"
+      disabled={isDisabled}
     >
       {result.map((res) => (
         <option

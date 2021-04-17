@@ -41,7 +41,6 @@ export const getListOfUsers = () => async (dispatch) => {
 export const settingSortCategory = (currentData, category) => async (
   dispatch
 ) => {
-  debugger;
   dispatch({
     type: SORT_CATEGORY,
     payload: category,
