@@ -190,6 +190,7 @@ class DragDrop extends Component {
           <DragDropContext onDragEnd={this.onDragEnd}>
             {newSetData.map((valueData, indexValue) => (
               <Droppable
+                key={indexValue}
                 droppableId={
                   indexValue === 0
                     ? "priorityLow"
@@ -243,7 +244,16 @@ class DragDrop extends Component {
                             </div>
                             <div className="bottom-wrapper">
                               <div className="priority-wrapper">
-                                <Icon.ArrowUp color="green" size={20} />
+                                <Icon.ArrowUp
+                                  color={
+                                    item.priority === "1"
+                                      ? "green"
+                                      : item.priority === "2"
+                                      ? "yellow"
+                                      : "red"
+                                  }
+                                  size={20}
+                                />
                                 <div className="text-styling">
                                   {item?.due_date?.toLocaleDateString()}
                                 </div>

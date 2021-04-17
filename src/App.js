@@ -20,7 +20,7 @@ function App(props) {
         <SpinnerComponent />
         <Switch>
           <Route exact={true} path="/login" component={LandingPage} />
-          <AuthRoute isValidUser={true} />
+          <AuthRoute isValidUser={props.isValidUser?.getCurrentStatus} />
           <Route
             path="/"
             render={() => <Redirect from="/" to="/login" />}
