@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/draganddrop/static/css/main.ba3a4715.chunk.css",
+    "main.js": "/draganddrop/static/js/main.947bb60a.chunk.js",
+    "main.js.map": "/draganddrop/static/js/main.947bb60a.chunk.js.map",
+    "runtime-main.js": "/draganddrop/static/js/runtime-main.ec1aa9f2.js",
+    "runtime-main.js.map": "/draganddrop/static/js/runtime-main.ec1aa9f2.js.map",
+    "static/css/2.c3e9737a.chunk.css": "/draganddrop/static/css/2.c3e9737a.chunk.css",
+    "static/js/2.222b2445.chunk.js": "/draganddrop/static/js/2.222b2445.chunk.js",
+    "static/js/2.222b2445.chunk.js.map": "/draganddrop/static/js/2.222b2445.chunk.js.map",
+    "index.html": "/draganddrop/index.html",
+    "precache-manifest.b553d08219f02234f28651b6b9e151c4.js": "/draganddrop/precache-manifest.b553d08219f02234f28651b6b9e151c4.js",
+    "service-worker.js": "/draganddrop/service-worker.js",
+    "static/css/2.c3e9737a.chunk.css.map": "/draganddrop/static/css/2.c3e9737a.chunk.css.map",
+    "static/css/main.ba3a4715.chunk.css.map": "/draganddrop/static/css/main.ba3a4715.chunk.css.map",
+    "static/js/2.222b2445.chunk.js.LICENSE.txt": "/draganddrop/static/js/2.222b2445.chunk.js.LICENSE.txt",
+    "static/media/style.scss": "/draganddrop/static/media/bg-abstract-resized.59ef1da4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ec1aa9f2.js",
+    "static/css/2.c3e9737a.chunk.css",
+    "static/js/2.222b2445.chunk.js",
+    "static/css/main.ba3a4715.chunk.css",
+    "static/js/main.947bb60a.chunk.js"
+  ]
+}
