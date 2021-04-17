@@ -52,10 +52,19 @@ const SearchSortWrapper = styled.div`
   background: lightgray;
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) !important;
+  // justify-content: flex-end;
+  @media (max-width: 520px) {
+    padding: 5px;
+  }
   .input-search-sort {
     .sort-wrapper {
       display: flex;
       justify-content: flex-end;
+      @media (max-width: 520px) {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
 
       .form-group {
         display: flex;
@@ -67,6 +76,9 @@ const SearchSortWrapper = styled.div`
           margin: 0px;
           font-size: 1.2rem;
           margin-right: 10px;
+          @media (max-width: 520px) {
+            font-size: 1rem;
+          }
         }
       }
     }
@@ -86,9 +98,11 @@ const SearchSortWrapper = styled.div`
         margin: 10px;
         color: #be3946;
         margin-top: 3px !important;
+        @media (max-width: 520px) {
+          font-size: 1rem;
+        }
       }
     }
-    // justify-content: flex-end;
   }
 `;
 

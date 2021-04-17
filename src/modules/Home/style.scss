@@ -4,6 +4,9 @@
     border-radius: 10px;
 }
 .react-datepicker__input-container{
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 1px 2px;
+    border-radius: 18px;
     .react-datepicker-ignore-onclickoutside{
         display: block;
     width: 100%;
@@ -30,12 +33,21 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
     background: white !important;
     color: black;
+    width: auto !important;
+    @media (max-width: 520px) {
+    padding:  9px 5px  !important;
+    
+    }
 }
 
 .heading{
     margin: 20px;
     font-size: 1.2rem;
     font-weight: 700;
+    @media (max-width: 520px) {
+        margin: 10px;
+    font-size: 1rem;
+    }
 }
 .bottom-wrapper{
     display: flex;
@@ -78,12 +90,22 @@
     font-size: .6rem;
     font-weight: 600;
     margin-top:5px;
+    @media (max-width: 520px) {
+        font-size: .4rem;
+    }
 }
 .detail-element{
     padding: 10px;
     overflow-wrap: break-word;
     text-align: left;
+    @media (max-width: 520px) {
+        padding:  8px 5px;
+        overflow-wrap: break-word;
+        text-align: left;
+        font-size: .7rem;
+    }
 }
+
 
 .searchSection{
     display: flex;
@@ -97,9 +119,13 @@
 .wrapper-dragdrop{
     display: flex;
     padding: 10px;
-}
-.form-group{
-    display: flex;
-    align-items: center;
-    font-weight: 600;
+    @media (max-width: 520px) {
+    padding: 0px;
+    }
+    .draggable-inner-container{
+        width: 33%  !important;
+    @media (max-width: 520px) {
+    padding: 3px  !important;
+    }
+    }
 }

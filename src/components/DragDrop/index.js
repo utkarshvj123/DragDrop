@@ -175,205 +175,100 @@ class DragDrop extends Component {
   // But in this example everything is just done in one place for simplicity
   render() {
     console.log(this.state, ".....stateprnting..", this.props);
+    let newSetData = [
+      this.state.items,
+      this.state.selected,
+      this.state.otherSelected,
+    ];
+    // newSetData.push(this.state.items);
+    // newSetData.push(this.state.)
+
+    console.log(newSetData, ".newSetData...");
     return (
       <>
         {this.props.listOfAllTasks.dueDatedArray.length > 0 ? (
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="priorityLow">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  <div className="heading">Low Priority</div>
-                  {this.state.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                          className="draggable-component"
-                        >
+            {newSetData.map((valueData, indexValue) => (
+              <Droppable
+                droppableId={
+                  indexValue === 0
+                    ? "priorityLow"
+                    : indexValue === 1
+                    ? "priorityMedium"
+                    : "priorityHigh"
+                }
+              >
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                    className="draggable-inner-container"
+                  >
+                    <div className="heading">
+                      {indexValue === 0
+                        ? "Low Priority"
+                        : indexValue === 1
+                        ? "Medium priority"
+                        : "High Priority"}{" "}
+                    </div>
+                    {valueData.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                        className="inner-drop-down"
+                      >
+                        {(provided, snapshot) => (
                           <div
-                            className="cross-button"
-                            onClick={() => this.props.handlingRemoval(item)}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                            className="draggable-component"
                           >
-                            <Icon.ArchiveFill color="red" size={20} />
-                          </div>
-                          <div
-                            className="detail-element"
-                            onClick={() => this.props.handlingEdit(item)}
-                          >
-                            {item.message}
-                          </div>
-                          <div className="bottom-wrapper">
-                            <div className="priority-wrapper">
-                              <Icon.ArrowUp color="green" size={20} />
-                              <div className="text-styling">
-                                {item?.due_date?.toLocaleDateString()}
-                              </div>
+                            <div
+                              className="cross-button"
+                              onClick={() => this.props.handlingRemoval(item)}
+                            >
+                              <Icon.ArchiveFill color="red" size={18} />
                             </div>
-                            <div className="img-name-wrapper">
-                              <div className="circular-name">
-                                <img src={item.picture} className="text-name" />
-                              </div>
-                              <div className="text-styling">
-                                {item?.assigned_name}
-                              </div>
+                            <div
+                              className="detail-element"
+                              onClick={() => this.props.handlingEdit(item)}
+                            >
+                              {item.message}
                             </div>
-                          </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-            <Droppable droppableId="priorityMedium">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  <div className="heading">Medium Priority</div>
-
-                  {this.state.selected.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          className="draggable-component"
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                        >
-                          <div
-                            className="cross-button"
-                            onClick={() => this.props.handlingRemoval(item)}
-                          >
-                            <Icon.ArchiveFill color="red" size={20} />
-                          </div>
-                          <div
-                            className="detail-element"
-                            onClick={() => this.props.handlingEdit(item)}
-                          >
-                            {item.message}
-                          </div>{" "}
-                          <div className="bottom-wrapper">
-                            <div className="priority-wrapper">
-                              <Icon.ArrowUp color="orange" size={20} />
-                              <div className="text-styling">
-                                {item?.due_date?.toLocaleDateString()}
-                              </div>{" "}
-                            </div>
-                            <div className="img-name-wrapper">
-                              <div className="circular-name">
-                                {/* <span className="text-name">
-                                  {item.assigned_name}
-                                </span> */}
-                                <img src={item.picture} className="text-name" />
+                            <div className="bottom-wrapper">
+                              <div className="priority-wrapper">
+                                <Icon.ArrowUp color="green" size={20} />
+                                <div className="text-styling">
+                                  {item?.due_date?.toLocaleDateString()}
+                                </div>
                               </div>
-                              <div className="text-styling">
-                                {item?.assigned_name}
+                              <div className="img-name-wrapper">
+                                <div className="circular-name">
+                                  <img
+                                    src={item.picture}
+                                    className="text-name"
+                                  />
+                                </div>
+                                <div className="text-styling">
+                                  {item?.assigned_name}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-
-            <Droppable droppableId="priorityHigh">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  <div className="heading">High Priority</div>
-                  {this.state.otherSelected.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          className="draggable-component"
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                        >
-                          <div
-                            className="cross-button"
-                            onClick={() => this.props.handlingRemoval(item)}
-                          >
-                            <Icon.ArchiveFill color="red" size={20} />
-                          </div>
-
-                          <div
-                            className="detail-element"
-                            onClick={() => this.props.handlingEdit(item)}
-                          >
-                            {item.message}
-                          </div>
-                          {/* <div
-                            className="cross-button"
-                            onClick={() => this.props.handlingEdit(item)}
-                          >
-                            <Icon.PencilSquare color="black" size={20} />
-                          </div> */}
-                          <div className="bottom-wrapper">
-                            <div className="priority-wrapper">
-                              <Icon.ArrowUp color="red" size={20} />
-                              <div className="text-styling">
-                                {item?.due_date?.toLocaleDateString()}
-                              </div>
-                            </div>
-                            <div className="img-name-wrapper">
-                              <div className="circular-name">
-                                {/* <span className="text-name">
-                                  {item.assigned_name}
-                                </span> */}
-                                <img src={item.picture} className="text-name" />
-                              </div>
-                              <div className="text-styling">
-                                {item?.assigned_name}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            ))}
           </DragDropContext>
         ) : (
           <div>No data found</div>
@@ -383,3 +278,139 @@ class DragDrop extends Component {
   }
 }
 export default DragDrop;
+
+// <Droppable droppableId="priorityMedium">
+// {(provided, snapshot) => (
+//   <div
+//     ref={provided.innerRef}
+//     style={getListStyle(snapshot.isDraggingOver)}
+//   >
+//     <div className="heading">Medium Priority</div>
+
+//     {this.state.selected.map((item, index) => (
+//       <Draggable
+//         key={item.id}
+//         draggableId={item.id}
+//         index={index}
+//       >
+//         {(provided, snapshot) => (
+//           <div
+//             className="draggable-component"
+//             ref={provided.innerRef}
+//             {...provided.draggableProps}
+//             {...provided.dragHandleProps}
+//             style={getItemStyle(
+//               snapshot.isDragging,
+//               provided.draggableProps.style
+//             )}
+//           >
+//             <div
+//               className="cross-button"
+//               onClick={() => this.props.handlingRemoval(item)}
+//             >
+//               <Icon.ArchiveFill color="red" size={20} />
+//             </div>
+//             <div
+//               className="detail-element"
+//               onClick={() => this.props.handlingEdit(item)}
+//             >
+//               {item.message}
+//             </div>{" "}
+//             <div className="bottom-wrapper">
+//               <div className="priority-wrapper">
+//                 <Icon.ArrowUp color="orange" size={20} />
+//                 <div className="text-styling">
+//                   {item?.due_date?.toLocaleDateString()}
+//                 </div>{" "}
+//               </div>
+//               <div className="img-name-wrapper">
+//                 <div className="circular-name">
+//                   {/* <span className="text-name">
+//                     {item.assigned_name}
+//                   </span> */}
+//                   <img src={item.picture} className="text-name" />
+//                 </div>
+//                 <div className="text-styling">
+//                   {item?.assigned_name}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </Draggable>
+//     ))}
+//     {provided.placeholder}
+//   </div>
+// )}
+// </Droppable>
+
+// <Droppable droppableId="priorityHigh">
+// {(provided, snapshot) => (
+//   <div
+//     ref={provided.innerRef}
+//     style={getListStyle(snapshot.isDraggingOver)}
+//   >
+//     <div className="heading">High Priority</div>
+//     {this.state.otherSelected.map((item, index) => (
+//       <Draggable
+//         key={item.id}
+//         draggableId={item.id}
+//         index={index}
+//       >
+//         {(provided, snapshot) => (
+//           <div
+//             className="draggable-component"
+//             ref={provided.innerRef}
+//             {...provided.draggableProps}
+//             {...provided.dragHandleProps}
+//             style={getItemStyle(
+//               snapshot.isDragging,
+//               provided.draggableProps.style
+//             )}
+//           >
+//             <div
+//               className="cross-button"
+//               onClick={() => this.props.handlingRemoval(item)}
+//             >
+//               <Icon.ArchiveFill color="red" size={20} />
+//             </div>
+
+//             <div
+//               className="detail-element"
+//               onClick={() => this.props.handlingEdit(item)}
+//             >
+//               {item.message}
+//             </div>
+//             {/* <div
+//               className="cross-button"
+//               onClick={() => this.props.handlingEdit(item)}
+//             >
+//               <Icon.PencilSquare color="black" size={20} />
+//             </div> */}
+//             <div className="bottom-wrapper">
+//               <div className="priority-wrapper">
+//                 <Icon.ArrowUp color="red" size={20} />
+//                 <div className="text-styling">
+//                   {item?.due_date?.toLocaleDateString()}
+//                 </div>
+//               </div>
+//               <div className="img-name-wrapper">
+//                 <div className="circular-name">
+//                   {/* <span className="text-name">
+//                     {item.assigned_name}
+//                   </span> */}
+//                   <img src={item.picture} className="text-name" />
+//                 </div>
+//                 <div className="text-styling">
+//                   {item?.assigned_name}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </Draggable>
+//     ))}
+//     {provided.placeholder}
+//   </div>
+// )}
+// </Droppable>
