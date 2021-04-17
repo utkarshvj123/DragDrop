@@ -4,7 +4,7 @@ const getCurrentStatus = JSON.parse(localStorage.getItem("isValid"));
 
 const initialState = {
   getCurrentStatus,
-  spinnerVisibility: true,
+  spinnerVisibility: false,
 };
 
 export const loginReducer = (state = initialState, action) => {

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./style.scss";
-import { bindActionCreators } from "redux";
 import Select from "../../components/Select";
 
 import {
-  geStackExchanegeData,
   getListOfUsers,
   getTaskLists,
   createTask,
@@ -15,17 +13,15 @@ import {
   sortDataAccourdingToUserSpecific,
   settingSortCategory,
 } from "./actions";
-import NavBar from "../../components/NavBar";
 import { authenticateUserAction } from "../Login/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DragDrop from "../../components/DragDrop/index";
 import CreateTaskModal from "./Components/CreateTaskModal";
 import { spinerStateUpdate } from "../Login/actions";
-import { creatingRequiredDataFormat } from "../../constants/globalFunction";
 
 const Container = styled.div`
-  margin-top: 100px;
+  padding: 100px 0px 30px 0px;
 `;
 
 const TopWrapper = styled.div`
@@ -54,11 +50,12 @@ const Home = () => {
   const listOfAllTasks = useSelector(
     (state) => state?.homeData?.listOfAllTasks
   );
+  const sortBy = useSelector((state) => state?.homeData?.sortCategory);
 
   useEffect(() => {
     dispatch(spinerStateUpdate(true));
     dispatch(getListOfUsers()).then((res) => {
-      dispatch(getTaskLists(res.data.users)).then((res) => {
+      dispatch(getTaskLists(res.data.users, sortBy)).then((res) => {
         dispatch(spinerStateUpdate(false));
       });
     });
@@ -95,7 +92,7 @@ const Home = () => {
           if (response?.data?.status === "success") {
             modalEventHandler("enable");
             setCompleteJsonForDisplay({});
-            dispatch(getTaskLists(currentListOfUsers)).then((res) => {
+            dispatch(getTaskLists(currentListOfUsers, sortBy)).then((res) => {
               dispatch(spinerStateUpdate(false));
             });
             toastMessage("success", "Task successfully added.");
@@ -136,10 +133,7 @@ const Home = () => {
         assigned_to: selectedOption,
       });
     } else if (type === "sort") {
-      dispatch(settingSortCategory(selectedOption.value));
-      dispatch(
-        sortDataAccourdingToUserSpecific(listOfAllTasks, selectedOption.value)
-      );
+      dispatch(settingSortCategory(listOfAllTasks, selectedOption.value));
       setSortSelect(selectedOption);
     }
   };
@@ -168,7 +162,7 @@ const Home = () => {
           if (response.data.status === "success") {
             setEditModalVisible(!editModalVisible);
             setCompleteJsonForDisplay({});
-            dispatch(getTaskLists(currentListOfUsers)).then((res) =>
+            dispatch(getTaskLists(currentListOfUsers, sortBy)).then((res) =>
               dispatch(spinerStateUpdate(false))
             );
             toastMessage("success", "Detail updated successfully.");
@@ -182,7 +176,7 @@ const Home = () => {
     dispatch(spinerStateUpdate(true));
     dispatch(taskRemoved(removalValue.id)).then((response) => {
       if (response.data.status === "success") {
-        dispatch(getTaskLists(currentListOfUsers)).then((res) =>
+        dispatch(getTaskLists(currentListOfUsers, sortBy)).then((res) =>
           dispatch(spinerStateUpdate(false))
         );
         toastMessage("success", "Removed successfully.");
@@ -206,7 +200,7 @@ const Home = () => {
       )
     ).then((response) => {
       if (response.data.status === "success") {
-        dispatch(getTaskLists(currentListOfUsers)).then((res) =>
+        dispatch(getTaskLists(currentListOfUsers, sortBy)).then((res) =>
           dispatch(spinerStateUpdate(false))
         );
         toastMessage("success", "Priority updated successfully..");
@@ -228,73 +222,78 @@ const Home = () => {
   // console.log(_users, "......._users");
   return (
     <React.Fragment>
-      <Container className="container">
-        <button
-          className="btn btn-primary"
-          onClick={() => modalEventHandler("enable")}
-        >
-          Create Task
-        </button>
-        <div>
+      <div className="container">
+        <Container>
+          <button
+            className="btn btn-primary"
+            onClick={() => modalEventHandler("enable")}
+          >
+            Create Task
+          </button>
           <div>
-            <input
-              type="text"
-              value={searchValueDefined}
-              onChange={onChangeSearch}
-              placeholder="Search"
-              className="form-control"
-            />
-          </div>
-          <div>
-            <div className="form-group">
-              <label>Sort :</label>
-              <Select
-                currentSelected={sortSelect}
-                handleOnChange={(event) => hadleOnChangePriority(event, "sort")}
-                options={sortNumber}
+            <div>
+              <input
+                type="text"
+                value={searchValueDefined}
+                onChange={onChangeSearch}
+                placeholder="Search"
+                className="form-control"
               />
             </div>
+            <div>
+              <div className="form-group">
+                <label>Sort :</label>
+                <Select
+                  currentSelected={sortSelect}
+                  handleOnChange={(event) =>
+                    hadleOnChangePriority(event, "sort")
+                  }
+                  options={sortNumber}
+                />
+              </div>
+            </div>
           </div>
-        </div>
+          {Object.keys(listOfAllTasks).length > 0 ? (
+            <DragDrop
+              handlingRemoval={handlingRemoval}
+              listOfAllTasks={listOfAllTasks}
+              handlingEdit={handlingEdit}
+              handleDragDrop={handleDragDrop}
+            />
+          ) : (
+            <div>No data found</div>
+          )}
+          {modalVisble && (
+            <CreateTaskModal
+              modalVisble={modalVisble}
+              modalEventHandler={modalEventHandler}
+              completeJsonForDisplay={completeJsonForDisplay}
+              onChangeDateTime={onChangeDateTime}
+              onChangeMessage={onChangeMessage}
+              hadleOnChangePriority={hadleOnChangePriority}
+              currentListOfUsers={currentListOfUsers}
+              title={"Create Task"}
+              btnName="Create"
+              // currentType={""}
+            />
+          )}
+          {editModalVisible && (
+            <CreateTaskModal
+              modalVisble={editModalVisible}
+              modalEventHandler={editModalSubmitHandler}
+              completeJsonForDisplay={completeJsonForDisplay}
+              onChangeDateTime={onChangeDateTime}
+              onChangeMessage={onChangeMessage}
+              hadleOnChangePriority={hadleOnChangePriority}
+              currentListOfUsers={currentListOfUsers}
+              title={"Edit Task"}
+              btnName="Edit"
 
-        {Object.keys(listOfAllTasks).length > 0 && (
-          <DragDrop
-            handlingRemoval={handlingRemoval}
-            listOfAllTasks={listOfAllTasks}
-            handlingEdit={handlingEdit}
-            handleDragDrop={handleDragDrop}
-          />
-        )}
-        {modalVisble && (
-          <CreateTaskModal
-            modalVisble={modalVisble}
-            modalEventHandler={modalEventHandler}
-            completeJsonForDisplay={completeJsonForDisplay}
-            onChangeDateTime={onChangeDateTime}
-            onChangeMessage={onChangeMessage}
-            hadleOnChangePriority={hadleOnChangePriority}
-            currentListOfUsers={currentListOfUsers}
-            title={"Create Task"}
-            btnName="Create"
-            // currentType={""}
-          />
-        )}
-        {editModalVisible && (
-          <CreateTaskModal
-            modalVisble={editModalVisible}
-            modalEventHandler={editModalSubmitHandler}
-            completeJsonForDisplay={completeJsonForDisplay}
-            onChangeDateTime={onChangeDateTime}
-            onChangeMessage={onChangeMessage}
-            hadleOnChangePriority={hadleOnChangePriority}
-            currentListOfUsers={currentListOfUsers}
-            title={"Edit Task"}
-            btnName="Edit"
-
-            // currentType={""}
-          />
-        )}
-      </Container>
+              // currentType={""}
+            />
+          )}
+        </Container>
+      </div>
     </React.Fragment>
   );
   // }

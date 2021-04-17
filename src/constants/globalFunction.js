@@ -67,11 +67,16 @@ export const creatingRequiredDataFormat = (array, searchValue, olderArray) => {
   };
 };
 
-export const mappingDataWithUserDetail = (smallerArray, biggerArray) => {
+export const mappingDataWithUserDetail = (
+  smallerArray,
+  biggerArray,
+  sortedName
+) => {
   let array1 = [];
   let array2 = [];
   let array3 = [];
   let completeArray = [];
+  let requiredData = {};
   smallerArray.filter((obj) => {
     biggerArray.filter((obj2) => {
       if (obj2.assigned_to === obj.id) {
@@ -92,24 +97,50 @@ export const mappingDataWithUserDetail = (smallerArray, biggerArray) => {
       }
     });
   });
-  return {
-    low: array1,
-    medium: array2,
-    high: array3,
-    dueDatedArray: completeArray,
-    clonedData: completeArray,
-  };
+  if (sortedName === "") {
+    requiredData = {
+      low: array1,
+      medium: array2,
+      high: array3,
+      dueDatedArray: completeArray,
+      clonedData: completeArray,
+    };
+  } else {
+    const data = {
+      low: array1,
+      medium: array2,
+      high: array3,
+      dueDatedArray: completeArray,
+      clonedData: completeArray,
+    };
+    requiredData = objectCreationAfterSort(data, sortedName);
+    // {
+    //   low: objectCreationAfterSort(array1, sortedName),
+    //   medium: objectCreationAfterSort(array2, sortedName),
+    //   high: objectCreationAfterSort(array3),
+    //   dueDatedArray: objectCreationAfterSort(completeArray, sortedName),
+    //   clonedData: objectCreationAfterSort(completeArray, sortedName),
+    // };
+  }
+  debugger;
+  return requiredData;
 };
 
 export const objectCreationAfterSort = (objectValue, sortName) => {
   const cloneDataObj = { ...objectValue };
-  return {
-    low: sortData(cloneDataObj.low, sortName),
-    medium: sortData(cloneDataObj.medium, sortName),
-    high: sortData(cloneDataObj.high, sortName),
-    dueDatedArray: sortData(cloneDataObj.dueDatedArray, sortName),
-    clonedData: sortData(cloneDataObj.clonedData, sortName),
-  };
+  let newerObj = {};
+  if (cloneDataObj.length === undefined) {
+    newerObj = {
+      low: sortData(cloneDataObj.low, sortName),
+      medium: sortData(cloneDataObj.medium, sortName),
+      high: sortData(cloneDataObj.high, sortName),
+      dueDatedArray: sortData(cloneDataObj.dueDatedArray, sortName),
+      clonedData: sortData(cloneDataObj.clonedData, sortName),
+    };
+  } else if (cloneDataObj.length > 0) {
+    newerObj = sortData(cloneDataObj.low, sortName);
+  }
+  return newerObj;
 };
 
 export const sortData = (allData, sortName) => {

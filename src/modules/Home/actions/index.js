@@ -38,22 +38,29 @@ export const getListOfUsers = () => async (dispatch) => {
   }
 };
 
-export const settingSortCategory = (category) => async (dispatch) => {
+export const settingSortCategory = (currentData, category) => async (
+  dispatch
+) => {
   debugger;
   dispatch({
     type: SORT_CATEGORY,
     payload: category,
   });
+  dispatch(sortDataAccourdingToUserSpecific(currentData, category));
 };
 
-export const getTaskLists = (userList) => async (dispatch) => {
+export const getTaskLists = (userList, sortedName) => async (dispatch) => {
   try {
     const newUrl = `${URL}/list`;
     const response = await axios.get(newUrl, { headers });
     if (response?.data?.status === "success") {
       dispatch({
         type: GET_LIST_TASKS,
-        payload: mappingDataWithUserDetail(userList, response?.data?.tasks),
+        payload: mappingDataWithUserDetail(
+          userList,
+          response?.data?.tasks,
+          sortedName
+        ),
       });
     }
     return response;

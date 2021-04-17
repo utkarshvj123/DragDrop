@@ -7,13 +7,12 @@ import {
 
 const initialState = {
   listOfAllUsers: [],
-  listOfAllTasks: {},
+  listOfAllTasks: [],
   sortCategory: "",
   modalPopUp: false,
 };
 
 export const homeReducer = (state = initialState, action) => {
-  console.log(action, "....action");
   switch (action.type) {
     case GET_LIST_USERS:
       return { ...state, listOfAllUsers: action.payload };
