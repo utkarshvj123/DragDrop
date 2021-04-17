@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./style.scss";
 import Select from "../../components/Select";
+import * as Icon from "react-bootstrap-icons";
 
 import {
   getListOfUsers,
@@ -228,6 +229,7 @@ const Home = () => {
             className="btn btn-primary"
             onClick={() => modalEventHandler("enable")}
           >
+            <Icon.Plus />
             Create Task
           </button>
           <div>
