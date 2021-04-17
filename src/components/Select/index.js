@@ -19,17 +19,6 @@ const Select = ({ currentSelected, handleOnChange, options, isDisabled }) => {
     name: "Select",
     id: options.length + 2,
   });
-  // dataNewvalue = dataNewvalue.splice(0, 0, {
-  //   name: "Select",
-  //   id: options.length + 2,
-  // });
-  console.log(
-    dataNewvalue,
-    ".....currentSelected?.id..",
-    options,
-    ".....result....",
-    result
-  );
   return (
     <select
       className="form-control"

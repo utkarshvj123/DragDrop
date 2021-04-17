@@ -173,16 +173,11 @@ class DragDrop extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
-    console.log(this.state, ".....stateprnting..", this.props);
     let newSetData = [
       this.state.items,
       this.state.selected,
       this.state.otherSelected,
     ];
-    // newSetData.push(this.state.items);
-    // newSetData.push(this.state.)
-
-    console.log(newSetData, ".newSetData...");
     return (
       <>
         {this.props.listOfAllTasks.dueDatedArray.length > 0 ? (

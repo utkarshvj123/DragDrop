@@ -257,8 +257,6 @@ const Home = () => {
     setEditModalVisible(!editModalVisible);
   };
   const handleDragDrop = (json) => {
-    console.log(json, ".....json");
-
     dispatch(spinerStateUpdate(true));
     dispatch(
       updateTask(
@@ -287,7 +285,6 @@ const Home = () => {
     { id: "2", name: "Name", value: "assigned_name" },
   ];
 
-  // console.log(_users, "......._users");
   const isDisabledSordSearch =
     Object.keys(listOfAllTasks).length > 0 ? false : true;
   return (

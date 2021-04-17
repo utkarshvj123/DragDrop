@@ -26,7 +26,6 @@ const SpinnerComponent = () => {
   const spinnerState = useSelector(
     (state) => state?.isValidUser?.spinnerVisibility
   );
-  console.log(spinnerState, ".....spinnerStatespinnerState");
   return (
     <DarkBackground disappear={spinnerState}>
       <LoadingOverlay
