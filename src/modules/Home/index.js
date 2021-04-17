@@ -11,10 +11,8 @@ import {
   taskRemoved,
   updateTask,
   searchingName,
-  sortDataAccourdingToUserSpecific,
   settingSortCategory,
 } from "./actions";
-import { authenticateUserAction } from "../Login/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import DragDrop from "../../components/DragDrop/index";

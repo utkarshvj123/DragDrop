@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { authenticateUserAction } from "../Login/actions";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
 
 const StyledLabel = styled.label`
   text-align: left;

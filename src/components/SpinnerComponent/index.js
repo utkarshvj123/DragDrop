@@ -1,7 +1,7 @@
 import React from "react";
 import LoadingOverlay from "react-loading-overlay";
 import styled, { css } from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const DarkBackground = styled.div`
   display: none; /* Hidden by default */

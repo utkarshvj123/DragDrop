@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import ReduxPromise from "redux-promise";
 import { applyMiddleware, compose, createStore } from "redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore(

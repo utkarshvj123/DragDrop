@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import Home from "../modules/Home";
 import NavBar from "../components/NavBar";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authenticateUserAction } from "../modules/Login/actions";
 
 export default function AuthRoute(props) {

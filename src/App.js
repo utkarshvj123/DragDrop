@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { connect } from "react-redux";
 import AuthRoute from "./router/AuthRoute";
-import Login from "./modules/Login";
 import PropTypes from "prop-types";
 import LandingPage from "./modules/LandingPage";
 import SpinnerComponent from "./components/SpinnerComponent";

@@ -2,7 +2,7 @@ import React from "react";
 
 const Select = ({ currentSelected, handleOnChange, options, isDisabled }) => {
   const gettingChangedvalue = (event) => {
-    const findedvalue = options.find((film) => film.id == event.target.value);
+    const findedvalue = options.find((film) => film.id === event.target.value);
     handleOnChange(findedvalue);
   };
 
