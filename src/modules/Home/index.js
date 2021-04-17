@@ -53,9 +53,27 @@ const SearchSortWrapper = styled.div`
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) !important;
   .input-search-sort {
+    .sort-wrapper {
+      display: flex;
+      justify-content: flex-end;
+
+      .form-group {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        width: 300px;
+        label {
+          width: 64px;
+          margin: 0px;
+          font-size: 1.2rem;
+          margin-right: 10px;
+        }
+      }
+    }
     .input-search {
       width: 100%;
       margin: 20px 0px;
+
       input {
         height: inherit;
         border-radius: 54px;
@@ -67,6 +85,7 @@ const SearchSortWrapper = styled.div`
         font-weight: 700;
         margin: 10px;
         color: #be3946;
+        margin-top: 3px !important;
       }
     }
     // justify-content: flex-end;
@@ -287,17 +306,18 @@ const Home = () => {
                 />
                 <div className="search-text">Devza Search</div>
               </div>
-
-              <div className="form-group">
-                <label>Sort :</label>
-                <Select
-                  currentSelected={sortSelect}
-                  handleOnChange={(event) =>
-                    hadleOnChangePriority(event, "sort")
-                  }
-                  options={sortNumber}
-                  isDisabled={isDisabledSordSearch}
-                />
+              <div className="sort-wrapper">
+                <div className="form-group">
+                  <label>Sort :</label>
+                  <Select
+                    currentSelected={sortSelect}
+                    handleOnChange={(event) =>
+                      hadleOnChangePriority(event, "sort")
+                    }
+                    options={sortNumber}
+                    isDisabled={isDisabledSordSearch}
+                  />
+                </div>
               </div>
             </div>
             {Object.keys(listOfAllTasks).length > 0 ? (
