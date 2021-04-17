@@ -34,7 +34,7 @@
     background: white !important;
     color: black;
     width: auto !important;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
     padding:  9px 5px  !important;
     
     }
@@ -44,7 +44,7 @@
     margin: 20px;
     font-size: 1.2rem;
     font-weight: 700;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
         margin: 10px;
     font-size: 1rem;
     }
@@ -90,7 +90,7 @@
     font-size: .6rem;
     font-weight: 600;
     margin-top:5px;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
         font-size: .4rem;
     }
 }
@@ -98,7 +98,7 @@
     padding: 10px;
     overflow-wrap: break-word;
     text-align: left;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
         padding:  8px 5px;
         overflow-wrap: break-word;
         text-align: left;
@@ -119,13 +119,29 @@
 .wrapper-dragdrop{
     display: flex;
     padding: 10px;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
     padding: 0px;
     }
     .draggable-inner-container{
         width: 33%  !important;
-    @media (max-width: 520px) {
+    @media (max-width: 780px) {
     padding: 3px  !important;
+    }
+    }
+}
+
+
+.modal-wrapper-body{
+    .form-group{
+    display: flex;
+    flex-direction: column;
+    .react-datepicker-wrapper{
+        .react-datepicker__input-container{
+            input{
+                width: 100%;
+                height: calc(1.5em + 0.75rem + 2px);
+            }
+        }
     }
     }
 }

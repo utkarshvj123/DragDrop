@@ -27,4 +27,9 @@
     .example-modal-sizes-title-sm{
         margin: 5% 20%;
     }
-
+.modal-body{
+    .form-group{
+        display: flex;
+    flex-direction: column;
+    }
+}

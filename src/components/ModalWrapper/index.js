@@ -11,6 +11,7 @@ function ModalWrapper({
   onSubmit,
   heading,
   btnName,
+  classNameBody,
 }) {
   return (
     <>
@@ -22,7 +23,7 @@ function ModalWrapper({
         <Modal.Header closeButton>
           <Modal.Title>{heading}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{children}</Modal.Body>
+        <Modal.Body className={classNameBody}>{children}</Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={onSubmit}>
             {btnName}

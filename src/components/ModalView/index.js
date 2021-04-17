@@ -6,11 +6,11 @@ import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import "./style.css";
+import "./style.scss";
 import PropTypes from "prop-types";
 
 function ModalView(props) {
-  const { visibility, onHide, ariaLabelledby, header, children,size } = props;
+  const { visibility, onHide, ariaLabelledby, header, children, size } = props;
   return (
     <Modal
       show={visibility}

@@ -45,46 +45,45 @@ const CreateTaskModal = ({
       onSubmit={() => modalEventHandler("submit", completeJsonForDisplay)}
       heading={title}
       btnName={btnName}
+      classNameBody="modal-wrapper-body"
     >
-      <div>
-        <div className="form-group">
-          <label>Select Due-date :</label>
-          <DateTime
-            className="form-control"
-            value={completeJsonForDisplay?.due_date}
-            onChange={onChangeDateTime}
-            showTime={true}
-            placeHolder="Please select Date and Time"
-          />
-        </div>
-        <div className="form-group">
-          <label>Message :</label>
-          <input
-            className="form-control"
-            onChange={onChangeMessage}
-            value={
-              completeJsonForDisplay?.message === undefined
-                ? ""
-                : completeJsonForDisplay?.message
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Priority :</label>
-          <Select
-            currentSelected={completeJsonForDisplay?.priority}
-            handleOnChange={(event) => hadleOnChangePriority(event, "priority")}
-            options={prioritySet}
-          />
-        </div>
-        <div className="form-group">
-          <label>Assigned :</label>
-          <Select
-            currentSelected={completeJsonForDisplay?.assigned_to}
-            handleOnChange={(event) => hadleOnChangePriority(event, "assigned")}
-            options={currentListOfUsers}
-          />
-        </div>
+      <div className="form-group">
+        <label>Select Due-date :</label>
+        <DateTime
+          className="form-control"
+          value={completeJsonForDisplay?.due_date}
+          onChange={onChangeDateTime}
+          showTime={true}
+          placeHolder="Please select Date and Time"
+        />
+      </div>
+      <div className="form-group">
+        <label>Message :</label>
+        <input
+          className="form-control"
+          onChange={onChangeMessage}
+          value={
+            completeJsonForDisplay?.message === undefined
+              ? ""
+              : completeJsonForDisplay?.message
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label>Priority :</label>
+        <Select
+          currentSelected={completeJsonForDisplay?.priority}
+          handleOnChange={(event) => hadleOnChangePriority(event, "priority")}
+          options={prioritySet}
+        />
+      </div>
+      <div className="form-group">
+        <label>Assigned :</label>
+        <Select
+          currentSelected={completeJsonForDisplay?.assigned_to}
+          handleOnChange={(event) => hadleOnChangePriority(event, "assigned")}
+          options={currentListOfUsers}
+        />
       </div>
     </ModalWrapper>
   );
