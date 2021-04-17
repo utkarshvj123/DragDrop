@@ -11,15 +11,21 @@ export default function AuthRoute(props) {
   const dispatch = useDispatch();
   return (
     <div>
-      {isValidUser ? (
+      {isValidUser.getCurrentStatus ? (
         <>
-          <NavBar
-            logout={() => dispatch(authenticateUserAction(false))}
-            heading={"Devza"}
-            buttonName={"Logout"}
-            buttonClass="btn btn-primary"
-          />
-          <Route exact path="/home" component={Home} />
+          {props?.location?.pathname === "/home" ? (
+            <>
+              <NavBar
+                logout={() => dispatch(authenticateUserAction(false))}
+                heading={"Devza"}
+                buttonName={"Logout"}
+                buttonClass="btn btn-primary"
+              />
+              <Route exact={true} path="/home" component={Home} />
+            </>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </>
       ) : (
         <Redirect to="/login" />

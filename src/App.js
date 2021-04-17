@@ -19,7 +19,7 @@ function App(props) {
         <SpinnerComponent />
         <Switch>
           <Route exact={true} path="/login" component={LandingPage} />
-          <AuthRoute isValidUser={props.isValidUser?.getCurrentStatus} />
+          <AuthRoute isValidUser={props.getCurrentStatus} />
           <Route
             path="/"
             render={() => <Redirect from="/" to="/login" />}
@@ -31,13 +31,13 @@ function App(props) {
   );
 }
 
-const mapStateToProps = ({ isValidUser }) => {
-  return { isValidUser };
+const mapStateToProps = ({ isValidUser: getCurrentStatus }) => {
+  return { getCurrentStatus };
 };
 export default connect(mapStateToProps, null)(App);
 
 App.defaultProps = {
-  isValidUser: false,
+  getCurrentStatus: false,
 };
 App.propTypes = {
   isValidUser: PropTypes.bool,
