@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/DragDrop/static/css/main.80d6ec4c.chunk.css",
-    "main.js": "/DragDrop/static/js/main.413bfffc.chunk.js",
-    "main.js.map": "/DragDrop/static/js/main.413bfffc.chunk.js.map",
+    "main.js": "/DragDrop/static/js/main.67b89727.chunk.js",
+    "main.js.map": "/DragDrop/static/js/main.67b89727.chunk.js.map",
     "runtime-main.js": "/DragDrop/static/js/runtime-main.e9bbf6f3.js",
     "runtime-main.js.map": "/DragDrop/static/js/runtime-main.e9bbf6f3.js.map",
     "static/css/2.c3e9737a.chunk.css": "/DragDrop/static/css/2.c3e9737a.chunk.css",
     "static/js/2.44fc967e.chunk.js": "/DragDrop/static/js/2.44fc967e.chunk.js",
     "static/js/2.44fc967e.chunk.js.map": "/DragDrop/static/js/2.44fc967e.chunk.js.map",
     "index.html": "/DragDrop/index.html",
-    "precache-manifest.5da1edc55cc685b1580157aae1b1f133.js": "/DragDrop/precache-manifest.5da1edc55cc685b1580157aae1b1f133.js",
+    "precache-manifest.5a77e9ec5411889a1fb43574369a32fa.js": "/DragDrop/precache-manifest.5a77e9ec5411889a1fb43574369a32fa.js",
     "service-worker.js": "/DragDrop/service-worker.js",
     "static/css/2.c3e9737a.chunk.css.map": "/DragDrop/static/css/2.c3e9737a.chunk.css.map",
     "static/css/main.80d6ec4c.chunk.css.map": "/DragDrop/static/css/main.80d6ec4c.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.c3e9737a.chunk.css",
     "static/js/2.44fc967e.chunk.js",
     "static/css/main.80d6ec4c.chunk.css",
-    "static/js/main.413bfffc.chunk.js"
+    "static/js/main.67b89727.chunk.js"
   ]
 }
